@@ -1,7 +1,7 @@
 const path = require('path')
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require('vue-loader');
-const MimiCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
         alias: {
             vue$: "vue/dist/vue.esm.js",
             "static": path.resolve(__dirname, '../static'),
-            '@': path.relative(__dirname,"../src")
+            '@': path.resolve("src")
         },
         extensions: ['*', '.js', '.vue', '.json']
     },
@@ -45,7 +45,17 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [MimiCssExtractPlugin.loader, "css-loader"]
+                use: [
+                  {
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                      // you can specify a publicPath here
+                      // by default it uses publicPath in webpackOptions.output
+                      publicPath: '../'
+                    },
+                  },
+                  'css-loader',
+                ],
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -78,12 +88,12 @@ module.exports = {
             template: "./index.html",
             filename: "./index.html"
         }),
-        new MimiCssExtractPlugin({
+        new MiniCssExtractPlugin({
             filename: "static/css/[name].css",
             chunkFilename: "[id].css"
         }),
         new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, 'static'),
+            from: path.resolve(__dirname, '../static'),
             to: "static",
             ignore: ['.*']
           }]),

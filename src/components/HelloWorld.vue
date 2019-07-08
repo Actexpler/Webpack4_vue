@@ -1,5 +1,6 @@
 <template>
     <div class="hello">
+       <Head/>
        <h1>{{msg}}</h1>
        <h2>Essential Links</h2>
        <ul>
@@ -16,8 +17,10 @@
 </template>
 
 <script>
+import Head from "@/components/head/Head.vue";
     export default {
         name: "HelloWorld",
+        components: {Head},
         data() {
             return {
                 msg: "Welcome to Your Vue.js App"
