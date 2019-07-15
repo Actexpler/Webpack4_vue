@@ -11,11 +11,15 @@ export default {
     name: "App",
     components: {
         HelloWorld
+
     }
+
 }
 </script>
 
+
 <style>
+
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smooting: antialiased;
@@ -23,6 +27,6 @@ export default {
     text-align: center;
     color: darkgrey;
     margin-top: 60px;
-    
 }
+
 </style>
